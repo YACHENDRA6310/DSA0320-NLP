@@ -1,0 +1,24 @@
+import re
+class FSM:
+    def __init__(self):
+        self.transitions = [
+            (r'(?<![aeiou])y$', 'ies'),
+            (r'x$', 'xes'),
+            (r's$', 'ses'),
+            (r'sh$', 'shes'),
+            (r'z$', 'zes'),
+            (r'ch$', 'ches'),
+            (r'o$', 'oes'),
+            (r'$', 's')
+        ]
+    def pluralize(self, word):
+        for pattern, suffix in self.transitions:
+            if re.search(pattern, word):
+                return re.sub(pattern, '', word) + suffix
+        return word
+fsm = FSM()
+singular_nouns = ["box", "cat", "dog", "city", "baby", "potato", "tomato", "bus", "box", "church", "buzz", "kiss", "dish"]
+print("Pluralization using FSM:")
+for noun in singular_nouns:
+    plural = fsm.pluralize(noun)
+    print(f"Singular: {noun}  =>  Plural: {plural}")
