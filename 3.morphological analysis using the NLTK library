@@ -1,0 +1,34 @@
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
+
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+
+def morphological_analysis(words):
+    stemmer = PorterStemmer()
+    lemmatizer = WordNetLemmatizer()
+    
+    print("Original Word | Stem | Lemma")
+    print("-" * 40)
+    
+    for word in words:
+        stem = stemmer.stem(word)
+        lemma = lemmatizer.lemmatize(word)
+        print(f"{word:<15} | {stem:<4} | {lemma}")
+
+if __name__ == "__main__":
+    words_to_analyze = [
+        "running",
+        "ran",
+        "better",
+        "cats",
+        "happily",
+        "fishing",
+        "geese",
+        "children",
+        "swimming",
+        "mice"
+    ]
+    
+    morphological_analysis(words_to_analyze)
