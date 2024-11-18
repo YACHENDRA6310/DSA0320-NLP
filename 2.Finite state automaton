@@ -1,0 +1,21 @@
+ts = ["ab", "abab", "abcabs", "abcab", "ababab", "aab", "cab", "abc", "xyz"]
+s = 0
+for string in ts:
+    for char in string:
+        if s == 0:
+            if char == 'a':
+                s = 1
+        elif s == 1:
+            if char == 'b':
+                s = 2
+            else:
+                s = 0  
+        elif s == 2:
+            if char == 'a':
+                s = 1
+            else:
+                s = 0  
+    if s == 2:
+        print(f"'{string}' is accepted.")
+    else:
+        print(f"'{string}' is rejected.")
