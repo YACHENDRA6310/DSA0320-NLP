@@ -1,0 +1,29 @@
+import re
+
+def demonstrate_regex():
+    text = "The quick brown fox jumps over the lazy dog. Call me at 123-456-7890 or email me at example@mail.com."
+
+    match_start = re.match(r"The", text)
+    if match_start:
+        print("Match at the start of the text:", match_start.group())
+    
+    phone_pattern = r"\d{3}-\d{3}-\d{4}"  
+    phone_search = re.search(phone_pattern, text)
+    if phone_search:
+        print("Phone number found:", phone_search.group())
+    
+    email_pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"  
+    email_matches = re.findall(email_pattern, text)
+    print("Email(s) found:", email_matches)
+
+    masked_text = re.sub(phone_pattern, "[REDACTED]", text)
+    print("Text with phone number redacted:", masked_text)
+
+    split_text = re.split(r"\s+", text)  
+    print("Text split into words:", split_text)
+
+    t_words = re.findall(r"\b[Tt]\w+", text)
+    print("Words starting with 'T' or 't':", t_words)
+
+if __name__ == "__main__":
+    demonstrate_regex()
