@@ -1,0 +1,21 @@
+import re
+text = "The quick brown fox jumps over the lazy dog."
+rules = [
+    (r'\b[A-Z][a-z]*\b', 'NNP'),  
+    (r'\b\d+\b', 'CD'),           
+    (r'\b\w+ing\b', 'VBG'),       
+    (r'\b\w+ed\b', 'VBD'),        
+    (r'\b\w+s\b', 'VBZ'),         
+    (r'\b\w+\b', 'NN')            
+]
+tokens = text.split()
+tagged = []
+for token in tokens:
+    tag = 'UNK'    
+    for pattern, pos in rules:
+        if re.match(pattern, token):
+            tag = pos
+            break
+    tagged.append((token, tag))
+
+print(tagged)
