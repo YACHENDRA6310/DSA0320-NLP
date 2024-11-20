@@ -1,0 +1,21 @@
+import nltk
+from nltk.parse import RecursiveDescentParser
+from nltk.grammar import CFG
+grammar = CFG.fromstring("""
+ S -> NP VP
+    NP -> Det N | Det N PP | 'I'
+    VP -> V NP | VP PP | V PP
+    PP -> P NP
+    Det -> 'a' | 'the'
+    N -> 'man' | 'park' | 'dog' | 'telescope'
+    V -> 'saw' | 'walked'
+    P -> 'in' | 'with'
+""")
+try:
+  parser=RecursiveDescentParser(grammar)
+  sentence = "I saw a man in the park ".split()
+  for tree in parser.parse(sentence):
+    print(tree)
+    tree.pretty_print()
+except:
+  print("Recursion Error has occured")
