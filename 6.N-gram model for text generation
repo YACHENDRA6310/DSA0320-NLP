@@ -1,0 +1,23 @@
+import random
+from collections import defaultdict
+
+def train_bigram_model(text):
+    model = defaultdict(list)
+    words = text.split()
+    for i in range(len(words) - 1):
+        model[words[i]].append(words[i + 1])
+    return model
+
+def generate_text(model, start_word, num_words=10):
+    output = [start_word]
+    for _ in range(num_words - 1):
+        next_word = random.choice(model[start_word]) if start_word in model else None
+        if not next_word: break
+        output.append(next_word)
+        start_word = next_word
+    return ' '.join(output)
+
+text = """Machine learning is amazing. Machine learning helps us predict the future.
+It is a fascinating field of computer science."""
+bigram_model = train_bigram_model(text)
+print("Generated Text:", generate_text(bigram_model, "Machine", 15))
