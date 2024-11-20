@@ -1,0 +1,13 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag
+
+def pos_tagging(text):
+    tokens = word_tokenize(text)  
+    pos_tags = pos_tag(tokens)    
+    return pos_tags
+
+text = "NLTK is a leading platform for building Python programs to work with human language data."
+tags = pos_tagging(text)
+print("Part-of-Speech Tags:")
+print(tags)
