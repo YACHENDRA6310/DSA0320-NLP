@@ -1,0 +1,20 @@
+import nltk
+from nltk.parse import ChartParser
+from nltk.grammar import CFG
+grammar = CFG.fromstring("""
+    S  -> NP VP
+    NP -> Det N | Det Adj N | 'I'
+    VP -> V NP | V NP PP | V
+    PP -> P NP
+    Det -> 'a' | 'the'
+    N  -> 'dog' | 'cat' | 'telescope' | 'park'
+    Adj -> 'big' | 'small'
+    V  -> 'saw' | 'chased' | 'walked'
+    P  -> 'in' | 'with'
+""")
+parser = ChartParser(grammar)
+sentence = "I saw a big dog".split()
+print("Parse Trees:")
+for tree in parser.parse(sentence):
+    print(tree)
+    tree.pretty_print()
